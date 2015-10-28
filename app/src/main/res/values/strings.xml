@@ -2,4 +2,5 @@
     <string name="app_name">WeatherApp</string>
     <string name="title_activity_zip_codes">ZipCodes</string>
     <string name="action_zip_codes">Add ZipCode</string>
+    <string name="zipcode_example">99880</string>
 </resources>

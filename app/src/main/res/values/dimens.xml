@@ -5,5 +5,7 @@
     <dimen name="space_splash">6dp</dimen>
     <dimen name="max_height_image_view">150dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="appbar_elevation">4dp</dimen>
+    <dimen name="minimal_padding">5dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="appbar_elevation">6dp</dimen>
 </resources>
