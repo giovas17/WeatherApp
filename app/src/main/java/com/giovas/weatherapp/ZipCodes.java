@@ -14,10 +14,12 @@ import android.view.animation.ScaleAnimation;
 
 import com.giovas.adapters.ZipCodeAdapter;
 import com.giovas.data.DataBase;
+import com.giovas.dialogs.AddZipCodeDialog;
+import com.giovas.listeners.ZipCodeListener;
 
 import java.util.ArrayList;
 
-public class ZipCodes extends AppCompatActivity {
+public class ZipCodes extends AppCompatActivity implements ZipCodeListener{
 
     private RecyclerView list;
     private ZipCodeAdapter zipCodeAdapter;
@@ -57,10 +59,17 @@ public class ZipCodes extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AddZipCodeDialog addZipCodeDialog = new AddZipCodeDialog(ZipCodes.this);
+                addZipCodeDialog.setListener(ZipCodes.this);
+                addZipCodeDialog.show();
             }
         });
     }
 
+    @Override
+    public void AddZipCode(String zipcode) {
+        items.add(zipcode);
+        dataBase.newEntryZipcodes(zipcode);
+        zipCodeAdapter.notifyItemInserted(items.size());
+    }
 }
