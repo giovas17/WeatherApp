@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.giovas.data.DataBase;
 import com.giovas.weatherapp.R;
 
 import java.util.ArrayList;
@@ -35,6 +36,21 @@ public class ZipCodeAdapter extends RecyclerView.Adapter<ZipCodeAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.zipcode.setText(zipcodes.get(position));
+        holder.removeZipcode.setTag(position);
+        holder.removeZipcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (int) v.getTag();
+                removeAt(position);
+            }
+        });
+    }
+
+    private void removeAt(int position) {
+        new DataBase(context).removeZipcode(zipcodes.get(position));
+        zipcodes.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position,zipcodes.size());
     }
 
     @Override

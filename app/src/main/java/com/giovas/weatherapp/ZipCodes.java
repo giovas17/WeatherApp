@@ -13,6 +13,7 @@ import android.view.animation.LayoutAnimationController;
 import android.view.animation.ScaleAnimation;
 
 import com.giovas.adapters.ZipCodeAdapter;
+import com.giovas.data.DataBase;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class ZipCodes extends AppCompatActivity {
     private RecyclerView list;
     private ZipCodeAdapter zipCodeAdapter;
     private ArrayList<String> items = new ArrayList<>();
+    private DataBase dataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,15 @@ public class ZipCodes extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        items.add("99880");
-        items.add("54130");
-        items.add("56789");
-        items.add("12345");
+        dataBase = new DataBase(this);
+        items = dataBase.getZipcodes();
+        if(items == null || items.size() == 0) {
+            items.add("99880");
+            items.add("54130");
+            items.add("56789");
+            items.add("12345");
+            dataBase.newEntryZipcodes(items.get(0));
+        }
 
         list = (RecyclerView)findViewById(R.id.list_zipcodes);
         list.setLayoutManager(new LinearLayoutManager(this));

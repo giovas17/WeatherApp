@@ -26,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/removeZipCode"
-            android:background="@drawable/ic_close_black_24dp"/>
+            android:clickable="true"
+            android:background="@drawable/remove_icon"/>
 
     </LinearLayout>
 

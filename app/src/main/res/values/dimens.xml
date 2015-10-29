@@ -8,4 +8,5 @@
     <dimen name="minimal_padding">5dp</dimen>
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="appbar_elevation">6dp</dimen>
+    <dimen name="separator">2dp</dimen>
 </resources>

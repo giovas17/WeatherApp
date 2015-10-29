@@ -3,4 +3,7 @@
     <string name="title_activity_zip_codes">ZipCodes</string>
     <string name="action_zip_codes">Add ZipCode</string>
     <string name="zipcode_example">99880</string>
+    <string name="zipcode">Zip code:</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
 </resources>
