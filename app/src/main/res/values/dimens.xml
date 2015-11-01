@@ -11,4 +11,6 @@
     <dimen name="appbar_elevation">6dp</dimen>
     <dimen name="separator">2dp</dimen>
     <dimen name="max_width_dialog">300dp</dimen>
+    <dimen name="max_todays_icon">130dp</dimen>
+    <dimen name="normal_padding">10dp</dimen>
 </resources>

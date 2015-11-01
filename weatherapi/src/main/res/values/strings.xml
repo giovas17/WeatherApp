@@ -1,3 +1,17 @@
-<resources>
+<resources xmlns:gio="http://schemas.android.com/apk/res-auto">
     <string name="app_name">WeatherAPI</string>
+    <string name="api_key" translatable="false">8aabee841cffd35feb4de1776e01132c</string>
+    <string name="pref_server_status">server_status</string>
+    <string name="humidity">Humidity:</string>
+    <string name="pressure">Pressure:</string>
+    <string name="wind">Wind:</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="format_full_friendly_date"><gio:g id="day">%1$s</gio:g>, \n<gio:g id="date">%2$s</gio:g></string>
+    <string name="pref_loc_status" translatable="false">loc_status</string>
+    <string name="no_info">No weather information available</string>
+    <string name="no_internet">No weather information available because there is not an internet connection</string>
+    <string name="empty_forecast_list_server_down">No weather information available. The server is not returning data.</string>
+    <string name="empty_forecast_list_server_error">No weather information available. The server is not returning valid data. Please check for an updated version of Sunshine.</string>
+    <string name="empty_forecast_list_invalid_location">No weather information available. The location in settings is not recognized by the weather server.</string>
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.giovas.objects.EmptyRecyclerView
+        android:id="@+id/list_weather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.giovas.objects.EmptyRecyclerView>
+
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:text="@string/empty_data"/>
+</RelativeLayout>
