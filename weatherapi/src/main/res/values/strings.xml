@@ -7,8 +7,21 @@
     <string name="wind">Wind:</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="format_temperature"><gio:g id="temp">%1.0f</gio:g>\u00B0</string>
+    <string name="format_humidity"><gio:g id="humidity">%1.0f</gio:g> %%</string>
+    <string name="format_pressure"><gio:g id="pressure">%1.0f</gio:g> hPa</string>
+    <string name="format_wind_kmh"><gio:g id="pressure">%1$1.0f</gio:g> km/h <gio:g id="direction">%2$s</gio:g></string>
     <string name="format_full_friendly_date"><gio:g id="day">%1$s</gio:g>, \n<gio:g id="date">%2$s</gio:g></string>
     <string name="pref_loc_status" translatable="false">loc_status</string>
+    <!-- Speed direction -->
+    <string name="north">N</string>
+    <string name="south">S</string>
+    <string name="east">E</string>
+    <string name="west">W</string>
+    <string name="north_east">NE</string>
+    <string name="north_west">NW</string>
+    <string name="south_east">SE</string>
+    <string name="south_west">SW</string>
     <string name="no_info">No weather information available</string>
     <string name="no_internet">No weather information available because there is not an internet connection</string>
     <string name="empty_forecast_list_server_down">No weather information available. The server is not returning data.</string>

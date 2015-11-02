@@ -1,12 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/labels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/normal_padding"
+        app:columnCount="2">
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            android:text="@string/zipcode"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:id="@+id/zipLabel"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginStart="@dimen/normal_padding"
+            android:text=""/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            android:text="@string/city"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:layout_marginLeft="@dimen/normal_padding"
+            android:layout_marginStart="@dimen/normal_padding"
+            android:id="@+id/cityLabel"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textStyle="bold"
+            android:text=""/>
+
+    </android.support.v7.widget.GridLayout>
 
     <com.giovas.objects.EmptyRecyclerView
         android:id="@+id/list_weather"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/labels">
 
     </com.giovas.objects.EmptyRecyclerView>
 
@@ -14,6 +56,7 @@
         android:id="@+id/emptyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/labels"
         android:gravity="center"
         android:visibility="gone"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.giovas.data.DataBase;
@@ -26,10 +27,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements NetworkConnectionListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private ArrayList<WeatherObject> list;
     private ImageView backNavigation;
     private ImageView nextNavigation;
     private ViewPager pageLocations;
+    private TextView totalPages;
+    public static boolean isUpdate = false;
     private PagerAdapter adapter;
+    private TextView currentPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
         pageLocations = (ViewPager) findViewById(R.id.pagerLocations);
         backNavigation = (ImageView) findViewById(R.id.nav_back);
         nextNavigation = (ImageView) findViewById(R.id.nav_forward);
+        currentPage = (TextView) findViewById(R.id.numPages);
+        totalPages = (TextView) findViewById(R.id.totalPages);
 
         backNavigation.setEnabled(false);
         backNavigation.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +95,47 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
             }
         });
 
-        WeatherAPI.with(this).getWeatherFrom(new DataBase(this).getZipcodes());
+        pageLocations.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position > 0) {
+                    backNavigation.setEnabled(true);
+                } else {
+                    backNavigation.setEnabled(false);
+                }
+
+                if (position < list.size() - 1) {
+                    nextNavigation.setEnabled(true);
+                } else {
+                    nextNavigation.setEnabled(false);
+                }
+                currentPage.setText(String.valueOf(position + 1));
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        if (savedInstanceState != null && savedInstanceState.containsKey("list")){
+            list = savedInstanceState.getParcelableArrayList("list");
+        }else {
+            //Just call the WeatherAPI to retieve info from the server and updates the UI
+            WeatherAPI.with(this).getWeatherFrom(new DataBase(this).getZipcodes());
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("list",list);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -111,13 +157,33 @@ public class MainActivity extends AppCompatActivity implements NetworkConnection
     @Override
     public void OnLoadFinished(ArrayList<WeatherObject> pages) {
         Log.d(LOG_TAG, "Weather API finished to load the content with " + pages.size() + " pages");
+        list = pages;
+        totalPages.setText(String.valueOf(pages.size()));
+        adapter = new PagerAdapter(getSupportFragmentManager(),list);
+        pageLocations.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isUpdate) {
+            WeatherAPI.with(this).getWeatherFrom(new DataBase(this).getZipcodes());
+            isUpdate = !isUpdate;
+        }
+        if (list != null && list.size() > 0){
+            totalPages.setText(String.valueOf(list.size()));
+            adapter = new PagerAdapter(getSupportFragmentManager(),list);
+            pageLocations.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
-        private ArrayList<Forecast> forecasts;
+        private ArrayList<WeatherObject> forecasts;
 
-        public PagerAdapter(FragmentManager fm, ArrayList<Forecast> forecastArrayList){
+        public PagerAdapter(FragmentManager fm, ArrayList<WeatherObject> forecastArrayList){
             super(fm);
             forecasts = forecastArrayList;
         }

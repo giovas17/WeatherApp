@@ -64,6 +64,7 @@ public class WeatherAPI implements DownloadListener{
 
     public void getWeatherFrom(ArrayList<String> zipcodes){
         numberOfCalls = zipcodes.size();
+        weatherPages = new ArrayList<>();
         for(String zip : zipcodes){
             NetworkConnection net = new NetworkConnection(context,this);
             net.execute(zip);

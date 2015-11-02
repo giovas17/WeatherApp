@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.giovas.listeners.ZipCodeListener;
+import com.giovas.weatherapp.MainActivity;
 import com.giovas.weatherapp.R;
 
 /**
@@ -29,6 +30,7 @@ public class AddZipCodeDialog extends Dialog {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.isUpdate = true;
                 listener.AddZipCode(zipCodeEntry.getText().toString());
                 dismiss();
             }

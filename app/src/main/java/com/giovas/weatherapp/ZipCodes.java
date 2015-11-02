@@ -36,10 +36,7 @@ public class ZipCodes extends AppCompatActivity implements ZipCodeListener{
         dataBase = new DataBase(this);
         items = dataBase.getZipcodes();
         if(items == null || items.size() == 0) {
-            items.add("99880");
-            items.add("54130");
-            items.add("56789");
-            items.add("12345");
+            items.add("54130MX");
             dataBase.newEntryZipcodes(items.get(0));
         }
 

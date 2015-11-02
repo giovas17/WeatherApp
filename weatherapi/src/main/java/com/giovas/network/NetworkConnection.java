@@ -34,6 +34,7 @@ public class NetworkConnection extends AsyncTask<String,Void,Boolean> {
     private static String LOG_TAG = NetworkConnection.class.getSimpleName();
     // Will contain the raw JSON response as a string.
     private String forecastJsonStr = null;
+    private String zipcode = null;
     private DownloadListener listener;
     private Context context;
 
@@ -46,7 +47,7 @@ public class NetworkConnection extends AsyncTask<String,Void,Boolean> {
     protected Boolean doInBackground(String... params) {
         Log.d(LOG_TAG, "onPerformUpdate called.");
 
-        String zipcode = params[0];
+        zipcode = params[0];
 
         if (zipcode.length() > 0) {
 
@@ -151,10 +152,12 @@ public class NetworkConnection extends AsyncTask<String,Void,Boolean> {
                 Log.d(LOG_TAG,"Weather Object created successfully");
             } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
+                listener.obtainWeatherObject(new WeatherObject(null, null, zipcode));
                 WeatherAPI.setLocationStatus(context, WeatherAPI.LOCATION_STATUS_SERVER_INVALID);
                 e.printStackTrace();
             }
         }else {
+            listener.obtainWeatherObject(new WeatherObject(null,null,zipcode));
             Log.e(LOG_TAG,"Weather Object won't be created");
         }
     }
@@ -169,7 +172,7 @@ public class NetworkConnection extends AsyncTask<String,Void,Boolean> {
     private WeatherObject getWeatherDataFromJson(String forecastJsonStr)
             throws JSONException {
 
-        WeatherObject listWeather = null;
+        WeatherObject listWeather = new WeatherObject(null,null,zipcode);
 
         // Now we have a String representing the complete forecast in JSON Format.
         // Fortunately parsing is easy:  constructor takes the JSON string and converts it
@@ -214,10 +217,10 @@ public class NetworkConnection extends AsyncTask<String,Void,Boolean> {
                         break;
                     case HttpURLConnection.HTTP_NOT_FOUND:
                         WeatherAPI.setLocationStatus(context, WeatherAPI.LOCATION_STATUS_INVALID);
-                        return null;
+                        return listWeather;
                     default:
                         WeatherAPI.setLocationStatus(context, WeatherAPI.LOCATION_STATUS_SERVER_DOWN);
-                        return null;
+                        return listWeather;
                 }
             }
             JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
@@ -281,28 +284,26 @@ public class NetworkConnection extends AsyncTask<String,Void,Boolean> {
                 // description = Utility.getDescription(description, context);
                 weatherId = weatherObject.getInt(OWM_WEATHER_ID);
 
-                // Temperatures are in a child object called "temp".  Try not to name variables
-                // "temp" when working with temperature.  It confuses everybody.
+                // Temperatures are in a child object called "temp".
                 JSONObject temperatureObject = dayForecast.getJSONObject(OWM_TEMPERATURE);
                 high = temperatureObject.getDouble(OWM_MAX);
                 low = temperatureObject.getDouble(OWM_MIN);
 
                 Forecast forecast = new Forecast(weatherId, Utility.getFriendlyDayString(context, dateTime),
                         Utility.getArtResourceForWeatherCondition(weatherId),Utility.getAnimationResourceForWeatherCondition(weatherId),
-                        high,low,main,description,pressure,humidity,windSpeed,windDirection);
+                        high,low,main,description,pressure,(float)humidity,windSpeed,windDirection);
 
                 list.add(forecast);
 
             }
 
-            listWeather = new WeatherObject(list,cityName);
+            listWeather = new WeatherObject(list,cityName,zipcode);
             Log.d(LOG_TAG,"City added = " + cityName);
-            return listWeather;
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             WeatherAPI.setLocationStatus(context, WeatherAPI.LOCATION_STATUS_SERVER_INVALID);
             e.printStackTrace();
-            return null;
         }
+        return listWeather;
     }
 }
