@@ -1,9 +1,12 @@
 package com.giovas.objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by DarkGeat on 10/30/2015.
  */
-public class Forecast {
+public class Forecast implements Parcelable {
     private int weatherId;
     private String date;
     private int image;
@@ -13,12 +16,27 @@ public class Forecast {
     private String shortDesc;
     private String description;
     private double pressure;
-    private int humidity;
+    private float humidity;
     private double windSpeed;
     private double windDirection;
 
+    public Forecast() {
+        this.weatherId = 0;
+        this.date = "";
+        this.image = 0;
+        this.animation = 0;
+        this.max_temp = 0;
+        this.min_temp = 0;
+        this.shortDesc = "";
+        this.description = "";
+        this.pressure = 0;
+        this.humidity = 0;
+        this.windSpeed = 0;
+        this.windDirection = 0;
+    }
+
     public Forecast(int weatherId, String date, int image, int animation, double max_temp, double min_temp,
-                    String shortDesc, String description, double pressure, int humidity, double windSpeed, double windDirection) {
+                    String shortDesc, String description, double pressure, float humidity, double windSpeed, double windDirection) {
         this.weatherId = weatherId;
         this.date = date;
         this.image = image;
@@ -31,6 +49,14 @@ public class Forecast {
         this.humidity = humidity;
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
+    }
+
+    public int getWeatherId() {
+        return weatherId;
+    }
+
+    public void setWeatherId(int weatherId) {
+        this.weatherId = weatherId;
     }
 
     public int getAnimation() {
@@ -97,11 +123,11 @@ public class Forecast {
         this.pressure = pressure;
     }
 
-    public int getHumidity() {
+    public float getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(int humidity) {
+    public void setHumidity(float humidity) {
         this.humidity = humidity;
     }
 
@@ -119,5 +145,51 @@ public class Forecast {
 
     public void setWindDirection(double windDirection) {
         this.windDirection = windDirection;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static Parcelable.Creator<Forecast> CREATOR = new Creator<Forecast>() {
+        @Override
+        public Forecast createFromParcel(Parcel source) {
+            Forecast forecast = new Forecast();
+            forecast.setWeatherId(source.readInt());
+            forecast.setDate(source.readString());
+            forecast.setImage(source.readInt());
+            forecast.setAnimation(source.readInt());
+            forecast.setMax_temp(source.readDouble());
+            forecast.setMin_temp(source.readDouble());
+            forecast.setShortDesc(source.readString());
+            forecast.setDescription(source.readString());
+            forecast.setPressure(source.readDouble());
+            forecast.setHumidity(source.readFloat());
+            forecast.setWindSpeed(source.readDouble());
+            forecast.setWindDirection(source.readDouble());
+            return forecast;
+        }
+
+        @Override
+        public Forecast[] newArray(int size) {
+            return new Forecast[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(weatherId);
+        dest.writeString(date);
+        dest.writeInt(image);
+        dest.writeInt(animation);
+        dest.writeDouble(max_temp);
+        dest.writeDouble(min_temp);
+        dest.writeString(shortDesc);
+        dest.writeString(description);
+        dest.writeDouble(pressure);
+        dest.writeFloat(humidity);
+        dest.writeDouble(windSpeed);
+        dest.writeDouble(windDirection);
     }
 }

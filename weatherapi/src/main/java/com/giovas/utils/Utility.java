@@ -19,6 +19,16 @@ public class Utility {
 
     public static final String DATE_FORMAT = "yyyyMMdd";
 
+    public static String formatTemperature(Context mContext, double temperature, boolean isMetric) {
+        double temp;
+        if (!isMetric){
+            temp = 9 * temperature / 5 + 52;
+        }else{
+            temp = temperature;
+        }
+        return mContext.getString(R.string.format_temperature, temp);
+    }
+
     public static String getFriendlyDayString(Context context, long dateInMillis) {
         // The day string for forecast uses the following logic:
         // For today: "Today, June 8"
@@ -201,5 +211,38 @@ public class Utility {
         editor.apply();
     }
 
+    public static String getFormattedWind(Context context, float windSpeed, float degrees){
+        int windFormat;
+        windFormat = R.string.format_wind_kmh;
+        /*if (Utility.isMetric(context)) {
+            windFormat = R.string.format_wind_kmh;
+        } else {
+            windFormat = R.string.format_wind_mph;
+            windSpeed = .621371192237334f * windSpeed;
+        }*/
+
+        // From wind direction in degrees, determine compass direction as a string (e.g NW)
+        // You know what's fun, writing really long if/else statements with tons of possible
+        // conditions.  Seriously, try it!
+        String direction = "Unknown";
+        if (degrees >= 337.5 || degrees < 22.5) {
+            direction = context.getString(R.string.north);
+        } else if (degrees >= 22.5 && degrees < 67.5) {
+            direction = context.getString(R.string.north_east);
+        } else if (degrees >= 67.5 && degrees < 112.5) {
+            direction = context.getString(R.string.east);
+        } else if (degrees >= 112.5 && degrees < 157.5) {
+            direction = context.getString(R.string.south_east);
+        } else if (degrees >= 157.5 && degrees < 202.5) {
+            direction = context.getString(R.string.south);
+        } else if (degrees >= 202.5 && degrees < 247.5) {
+            direction = context.getString(R.string.south_west);
+        } else if (degrees >= 247.5 && degrees < 292.5) {
+            direction = context.getString(R.string.west);
+        } else if (degrees >= 292.5 && degrees < 337.5) {
+            direction = context.getString(R.string.north_west);
+        }
+        return String.format(context.getString(windFormat), windSpeed, direction);
+    }
 
 }

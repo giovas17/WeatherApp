@@ -1,162 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/normal_padding">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dialog_padding"
-        android:orientation="vertical">
+        app:cardElevation="@dimen/card_elevation">
 
-        <android.support.v7.widget.GridLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:columnCount="2">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dialog_padding"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:columnCount="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today, June 18"
+                    android:id="@+id/textDay"
+                    android:textSize="22sp"
+                    android:layout_marginBottom="@dimen/normal_padding"
+                    app:layout_columnSpan="2"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="22°"
+                    android:id="@+id/textMaxTemp"
+                    android:textSize="72sp"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="center"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageIconWeather"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/art_clear"
+                    app:layout_columnWeight="1"
+                    android:maxHeight="@dimen/max_todays_icon"
+                    android:maxWidth="@dimen/max_todays_icon"
+                    app:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="12°"
+                    android:id="@+id/textMinTemp"
+                    android:textSize="36sp"
+                    app:layout_gravity="center"
+                    app:layout_columnWeight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Clear"
+                    android:gravity="center"
+                    android:id="@+id/textWeather"
+                    app:layout_gravity="center"
+                    app:layout_columnWeight="1"/>
+
+            </android.support.v7.widget.GridLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/descriptionWeather"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Today, June 18"
-                android:id="@+id/textDay"
-                android:textSize="22sp"
-                android:layout_marginBottom="@dimen/normal_padding"
-                app:layout_columnSpan="2"
-                app:layout_columnWeight="1"
-                app:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="22°"
-                android:id="@+id/textMaxTemp"
-                android:textSize="72sp"
-                app:layout_columnWeight="1"
-                app:layout_gravity="center"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageIconWeather"
-                android:adjustViewBounds="true"
-                android:src="@drawable/art_clear"
-                app:layout_columnWeight="1"
-                android:maxHeight="@dimen/max_todays_icon"
-                android:maxWidth="@dimen/max_todays_icon"
-                app:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="12°"
-                android:id="@+id/textMinTemp"
-                android:textSize="36sp"
-                app:layout_gravity="center"
-                app:layout_columnWeight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Clear"
+                android:text=""
                 android:gravity="center"
-                android:id="@+id/textWeather"
-                app:layout_gravity="center"
-                app:layout_columnWeight="1"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
-        </android.support.v7.widget.GridLayout>
-
-        <TextView
-            android:id="@+id/descriptionWeather"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="The sun is do hot"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
-
-        <android.support.v7.widget.GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dialog_padding"
-            app:columnCount="4">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.GridLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_columnWeight="1"
-                app:layout_gravity="center_vertical"
-                app:layout_rowWeight="1"
-                android:textStyle="bold"
-                android:gravity="end"
-                android:paddingRight="@dimen/dialog_padding"
-                android:paddingEnd="@dimen/dialog_padding"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginStart="@dimen/normal_padding"
-                android:text="@string/humidity" />
+                android:layout_marginTop="@dimen/dialog_padding"
+                app:columnCount="4">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1"
-                app:layout_gravity="center_vertical"
-                app:layout_rowWeight="1"
-                android:textColor="@android:color/white"
-                android:id="@+id/detail_humidity_text" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="center_vertical"
+                    app:layout_rowWeight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textStyle="bold"
+                    android:gravity="end"
+                    android:paddingRight="@dimen/dialog_padding"
+                    android:paddingEnd="@dimen/dialog_padding"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginStart="@dimen/normal_padding"
+                    android:text="@string/humidity" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                app:layout_gravity="center_vertical"
-                android:gravity="end"
-                android:textStyle="bold"
-                android:paddingRight="@dimen/dialog_padding"
-                android:paddingEnd="@dimen/dialog_padding"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginStart="@dimen/normal_padding"
-                android:text="@string/pressure" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="center_vertical"
+                    app:layout_rowWeight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:id="@+id/detail_humidity_text" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                app:layout_gravity="center_vertical"
-                android:text="sddsfgsfdsfg"
-                android:id="@+id/detail_pressure_text" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_columnWeight="1"
+                    app:layout_rowWeight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    app:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:paddingRight="@dimen/dialog_padding"
+                    android:paddingEnd="@dimen/dialog_padding"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginStart="@dimen/normal_padding"
+                    android:text="@string/pressure" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                android:textStyle="bold"
-                app:layout_gravity="center_vertical"
-                android:gravity="end"
-                android:paddingRight="@dimen/dialog_padding"
-                android:paddingEnd="@dimen/dialog_padding"
-                android:layout_marginLeft="@dimen/normal_padding"
-                android:layout_marginStart="@dimen/normal_padding"
-                android:text="@string/wind"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_columnWeight="1"
+                    app:layout_rowWeight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    app:layout_gravity="center_vertical"
+                    android:text=""
+                    android:id="@+id/detail_pressure_text" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                app:layout_gravity="center_vertical"
-                android:text="nolose esto "
-                android:id="@+id/detail_wind_text" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_columnWeight="1"
+                    app:layout_rowWeight="1"
+                    android:textStyle="bold"
+                    app:layout_gravity="center_vertical"
+                    android:gravity="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:paddingRight="@dimen/dialog_padding"
+                    android:paddingEnd="@dimen/dialog_padding"
+                    android:layout_marginLeft="@dimen/normal_padding"
+                    android:layout_marginStart="@dimen/normal_padding"
+                    android:text="@string/wind"/>
 
-        </android.support.v7.widget.GridLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_columnWeight="1"
+                    app:layout_rowWeight="1"
+                    app:layout_gravity="center_vertical"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:id="@+id/detail_wind_text" />
 
-    </LinearLayout>
+            </android.support.v7.widget.GridLayout>
 
+        </LinearLayout>
 
-
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</FrameLayout>

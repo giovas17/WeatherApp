@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.giovas.data.DataBase;
+import com.giovas.weatherapp.MainActivity;
 import com.giovas.weatherapp.R;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class ZipCodeAdapter extends RecyclerView.Adapter<ZipCodeAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 int position = (int) v.getTag();
+                MainActivity.isUpdate = true;
                 removeAt(position);
             }
         });
